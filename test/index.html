@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JingJing Yu · Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #d7263d;
+      --red-dark: #a3172b;
+      --pink: #ff8fab;
+      --pink-soft: #ffe3ea;
+      --pink-pale: #fff4f7;
+      --white: #ffffff;
+      --ink: #3a1d24;
+      --muted: #8a5a66;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(215, 38, 61, 0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Poppins", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.6;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ---------- Nav ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 6vw;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--pink-soft);
+    }
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 1.5rem; font-weight: 700; color: var(--red);
+    }
+    .logo span { color: var(--pink); }
+    .nav ul { display: flex; gap: 28px; list-style: none; }
+    .nav a { font-weight: 500; font-size: 0.95rem; position: relative; }
+    .nav a::after {
+      content: ""; position: absolute; left: 0; bottom: -4px;
+      width: 0; height: 2px; background: var(--red); transition: width .3s;
+    }
+    .nav a:hover::after { width: 100%; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px;
+      align-items: center;
+      padding: 80px 6vw;
+      background: linear-gradient(135deg, var(--pink-pale) 0%, var(--pink-soft) 100%);
+      overflow: hidden;
+    }
+    .hero-tag {
+      display: inline-block; padding: 6px 16px; margin-bottom: 18px;
+      background: var(--white); color: var(--red);
+      border-radius: 999px; font-size: 0.85rem; font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 1.05;
+      color: var(--red-dark);
+    }
+    .hero h1 em { color: var(--pink); font-style: italic; }
+    .hero p { margin: 20px 0 32px; max-width: 480px; color: var(--muted); }
+    .btn {
+      display: inline-block; padding: 14px 32px; border-radius: 999px;
+      background: var(--red); color: var(--white); font-weight: 600;
+      box-shadow: var(--shadow); transition: transform .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); background: var(--red-dark); }
+    .btn.ghost {
+      background: transparent; color: var(--red); border: 2px solid var(--red);
+      box-shadow: none; margin-left: 12px;
+    }
+    .btn.ghost:hover { background: var(--red); color: var(--white); }
+
+    .hero-photo { position: relative; justify-self: center; }
+    .hero-photo .frame {
+      width: min(380px, 80vw); aspect-ratio: 4 / 5;
+      border-radius: 200px 200px var(--radius) var(--radius);
+      overflow: hidden; border: 8px solid var(--white);
+      box-shadow: 0 20px 50px rgba(215, 38, 61, 0.25);
+      position: relative; z-index: 1;
+    }
+    .hero-photo::before {
+      content: ""; position: absolute; inset: 30px -30px -30px 30px;
+      border-radius: 200px 200px var(--radius) var(--radius);
+      background: var(--red); opacity: .85;
+    }
+    .heart {
+      position: absolute; z-index: 2; font-size: 2rem; color: var(--red);
+      animation: float 3s ease-in-out infinite;
+    }
+    .heart.h1 { top: 10%; left: -30px; }
+    .heart.h2 { bottom: 15%; right: -40px; color: var(--pink); animation-delay: 1.2s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    /* ---------- Placeholder (until real images are assigned) ---------- */
+    .ph {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 6px; color: var(--red);
+      background: repeating-linear-gradient(45deg, var(--pink-soft) 0 14px, var(--pink-pale) 14px 28px);
+      font-size: 0.85rem; font-weight: 500; text-align: center; padding: 12px;
+    }
+    .ph::before { content: "♥"; font-size: 2rem; color: var(--pink); }
+    .frame img, .card img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- Sections ---------- */
+    section { padding: 90px 6vw; }
+    .section-head { text-align: center; margin-bottom: 48px; }
+    .section-head small {
+      color: var(--pink); font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    }
+    .section-head h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4vw, 2.8rem); color: var(--red-dark);
+    }
+    .section-head .line {
+      width: 60px; height: 3px; margin: 14px auto 0;
+      background: linear-gradient(90deg, var(--red), var(--pink)); border-radius: 3px;
+    }
+
+    /* ---------- About ---------- */
+    .about-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px;
+      max-width: 1000px; margin: 0 auto;
+    }
+    .about-intro { max-width: 680px; margin: 0 auto 48px; text-align: center; color: var(--muted); }
+    .info-card {
+      background: var(--white); border: 1px solid var(--pink-soft);
+      border-radius: var(--radius); padding: 28px; text-align: center;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .info-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .info-card .icon {
+      width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%;
+      display: grid; place-items: center; font-size: 1.5rem;
+      background: var(--pink-soft); color: var(--red);
+    }
+    .info-card h3 { color: var(--red); margin-bottom: 6px; font-size: 1.05rem; }
+    .info-card p { color: var(--muted); font-size: 0.92rem; }
+
+    /* ---------- Gallery ---------- */
+    #gallery { background: var(--pink-pale); }
+    .filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+    .filters button {
+      font: inherit; font-weight: 500; cursor: pointer;
+      padding: 8px 22px; border-radius: 999px;
+      border: 2px solid var(--pink); background: var(--white); color: var(--red);
+      transition: all .2s;
+    }
+    .filters button:hover { border-color: var(--red); }
+    .filters button.active { background: var(--red); border-color: var(--red); color: var(--white); }
+
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-auto-rows: 240px; gap: 18px; max-width: 1200px; margin: 0 auto;
+    }
+    .card {
+      position: relative; overflow: hidden; border-radius: var(--radius); cursor: pointer;
+      background: var(--white); box-shadow: 0 4px 14px rgba(215, 38, 61, 0.08);
+    }
+    .card.tall { grid-row: span 2; }
+    .card.wide { grid-column: span 2; }
+    .card img, .card .ph { transition: transform .5s; }
+    .card:hover img, .card:hover .ph { transform: scale(1.06); }
+    .card .overlay {
+      position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 18px; color: var(--white);
+      background: linear-gradient(to top, rgba(163, 23, 43, 0.85), transparent 60%);
+      opacity: 0; transition: opacity .3s;
+    }
+    .card:hover .overlay { opacity: 1; }
+    .overlay h4 { font-family: "Playfair Display", serif; font-size: 1.2rem; }
+    .overlay span { font-size: 0.8rem; color: var(--pink-soft); }
+    .card.hide { display: none; }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 100; display: none;
+      align-items: center; justify-content: center; padding: 24px;
+      background: rgba(58, 29, 36, 0.92);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox figure { max-width: 900px; width: 100%; text-align: center; }
+    .lightbox .lb-media {
+      max-height: 75vh; border-radius: var(--radius); overflow: hidden;
+      border: 6px solid var(--white); background: var(--white);
+    }
+    .lightbox .lb-media img { width: 100%; max-height: calc(75vh - 12px); object-fit: contain; }
+    .lightbox .lb-media .ph { height: 60vh; }
+    .lightbox figcaption { color: var(--white); margin-top: 14px; font-family: "Playfair Display", serif; font-size: 1.3rem; }
+    .lb-btn {
+      position: absolute; border: none; cursor: pointer;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--red); color: var(--white); font-size: 1.4rem;
+      display: grid; place-items: center; transition: background .2s;
+    }
+    .lb-btn:hover { background: var(--pink); }
+    .lb-close { top: 20px; right: 20px; }
+    .lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+    .lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
+
+    /* ---------- Quote ---------- */
+    .quote {
+      background: var(--red); color: var(--white); text-align: center;
+      padding: 80px 6vw;
+    }
+    .quote blockquote {
+      font-family: "Playfair Display", serif; font-style: italic;
+      font-size: clamp(1.4rem, 3vw, 2.2rem); max-width: 800px; margin: 0 auto;
+    }
+    .quote cite { display: block; margin-top: 16px; color: var(--pink-soft); font-style: normal; }
+
+    /* ---------- Contact / Footer ---------- */
+    .contact { text-align: center; }
+    .socials { display: flex; justify-content: center; gap: 14px; margin-top: 28px; }
+    .socials a {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: grid; place-items: center; font-weight: 600;
+      background: var(--pink-soft); color: var(--red); transition: all .2s;
+    }
+    .socials a:hover { background: var(--red); color: var(--white); transform: translateY(-3px); }
+    footer {
+      text-align: center; padding: 28px; font-size: 0.85rem;
+      background: var(--pink-soft); color: var(--muted);
+    }
+    footer span { color: var(--red); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 820px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding: 56px 16px 80px; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .nav { padding: 14px 16px; }
+      .nav ul { gap: 16px; }
+      section { padding: 70px 16px; }
+      .card.wide { grid-column: span 1; }
+    }
+    @media (max-width: 520px) {
+      .nav ul { display: none; }
+      .btn.ghost { margin: 12px 0 0; }
+      .grid { grid-auto-rows: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="#home" class="logo">JingJing<span>.</span></a>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="home">
+    <div>
+      <span class="hero-tag">♥ Personal Gallery</span>
+      <h1>Hello, I'm <br><em>JingJing Yu</em></h1>
+      <p>Welcome to my little corner of the internet — a collection of moments, memories, and the things that make me smile.</p>
+      <a href="#gallery" class="btn">View Gallery</a>
+      <a href="#about" class="btn ghost">About Me</a>
+    </div>
+    <div class="hero-photo">
+      <span class="heart h1">♥</span>
+      <span class="heart h2">♥</span>
+      <div class="frame" data-src="images/profile.jpg" data-label="Profile photo"></div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-head">
+      <small>Get to know me</small>
+      <h2>About Me</h2>
+      <div class="line"></div>
+    </div>
+    <p class="about-intro">
+      Hi! I'm JingJing. I love capturing everyday beauty — from city lights to quiet mornings.
+      This gallery is a place where I share my favorite photos and the stories behind them.
+    </p>
+    <div class="about-grid">
+      <div class="info-card">
+        <div class="icon">📷</div>
+        <h3>Photography</h3>
+        <p>Capturing candid moments and colorful details.</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">✈️</div>
+        <h3>Travel</h3>
+        <p>Exploring new places, one city at a time.</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">🌸</div>
+        <h3>Lifestyle</h3>
+        <p>Flowers, cafés, fashion and little joys.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="section-head">
+      <small>My moments</small>
+      <h2>Gallery</h2>
+      <div class="line"></div>
+    </div>
+    <div class="filters" id="filters">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="portrait">Portrait</button>
+      <button data-filter="travel">Travel</button>
+      <button data-filter="lifestyle">Lifestyle</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- Quote -->
+  <div class="quote">
+    <blockquote>"Collect moments, not things."</blockquote>
+    <cite>— JingJing Yu</cite>
+  </div>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="section-head">
+      <small>Say hello</small>
+      <h2>Let's Connect</h2>
+      <div class="line"></div>
+    </div>
+    <p style="color: var(--muted)">Want to chat or collaborate? Reach out anytime.</p>
+    <div style="margin-top: 24px"><a href="mailto:hello@example.com" class="btn">Send a Message</a></div>
+    <div class="socials">
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="Facebook">FB</a>
+      <a href="#" aria-label="TikTok">TT</a>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> JingJing Yu · Made with <span>♥</span>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+    <figure>
+      <div class="lb-media" id="lbMedia"></div>
+      <figcaption id="lbCaption"></figcaption>
+    </figure>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next">›</button>
+  </div>
+
+  <script>
+    // ===== Assign your images here =====
+    // Put photos in the "images/" folder and update src / title / category.
+    // size: "" (normal), "tall" or "wide"
+    const photos = [
+      { src: "images/photo1.jpg", title: "Spring Bloom",   category: "lifestyle", size: "tall" },
+      { src: "images/photo2.jpg", title: "City Lights",    category: "travel",    size: "" },
+      { src: "images/photo3.jpg", title: "Sunday Smile",   category: "portrait",  size: "" },
+      { src: "images/photo4.jpg", title: "Seaside Walk",   category: "travel",    size: "wide" },
+      { src: "images/photo5.jpg", title: "Café Corner",    category: "lifestyle", size: "" },
+      { src: "images/photo6.jpg", title: "Golden Hour",    category: "portrait",  size: "tall" },
+      { src: "images/photo7.jpg", title: "Mountain Air",   category: "travel",    size: "" },
+      { src: "images/photo8.jpg", title: "Pink Mood",      category: "lifestyle", size: "" },
+      { src: "images/photo9.jpg", title: "Just Me",        category: "portrait",  size: "wide" },
+    ];
+
+    // Render an <img>, falling back to a pink placeholder if the file is missing.
+    function media(src, label) {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = label;
+      img.loading = "lazy";
+      img.onerror = () => {
+        const ph = document.createElement("div");
+        ph.className = "ph";
+        ph.textContent = label;
+        img.replaceWith(ph);
+      };
+      return img;
+    }
+
+    // Hero profile photo
+    const frame = document.querySelector(".hero-photo .frame");
+    frame.appendChild(media(frame.dataset.src, frame.dataset.label));
+
+    // Gallery grid
+    const grid = document.getElementById("grid");
+    photos.forEach((p, i) => {
+      const card = document.createElement("div");
+      card.className = `card ${p.size}`.trim();
+      card.dataset.category = p.category;
+      card.dataset.index = i;
+      card.appendChild(media(p.src, p.title));
+      card.insertAdjacentHTML("beforeend",
+        `<div class="overlay"><h4>${p.title}</h4><span>${p.category}</span></div>`);
+      card.addEventListener("click", () => openLightbox(i));
+      grid.appendChild(card);
+    });
+
+    // Filters
+    let visible = photos.map((_, i) => i);
+    document.getElementById("filters").addEventListener("click", e => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      document.querySelectorAll("#filters button").forEach(b => b.classList.toggle("active", b === btn));
+      const f = btn.dataset.filter;
+      visible = [];
+      grid.querySelectorAll(".card").forEach(card => {
+        const show = f === "all" || card.dataset.category === f;
+        card.classList.toggle("hide", !show);
+        if (show) visible.push(+card.dataset.index);
+      });
+    });
+
+    // Lightbox
+    const lb = document.getElementById("lightbox");
+    const lbMedia = document.getElementById("lbMedia");
+    const lbCaption = document.getElementById("lbCaption");
+    let current = 0;
+
+    function openLightbox(i) {
+      current = i;
+      const p = photos[i];
+      lbMedia.replaceChildren(media(p.src, p.title));
+      lbCaption.textContent = p.title;
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden", "false");
+    }
+    function closeLightbox() {
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden", "true");
+    }
+    function step(dir) {
+      const pos = visible.indexOf(current);
+      openLightbox(visible[(pos + dir + visible.length) % visible.length]);
+    }
+
+    document.getElementById("lbClose").onclick = closeLightbox;
+    document.getElementById("lbPrev").onclick = () => step(-1);
+    document.getElementById("lbNext").onclick = () => step(1);
+    lb.addEventListener("click", e => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener("keydown", e => {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") step(-1);
+      if (e.key === "ArrowRight") step(1);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
